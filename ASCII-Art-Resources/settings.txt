@@ -1,0 +1,7 @@
+Art-charsPerPixel 2
+Art-Font Andale Mono
+charSet ...
+
+Font-Size-File 22
+Font-Size-Text 18
+Font-Size-Tag 16
