@@ -15,7 +15,8 @@ public class GUI implements ComponentListener, MouseListener {
     private int maxChars;
 	private int tagBorderThickness;
 	private int inputBorderThickness;
-	private int loadingDivisor;
+	public int loadingSections;
+	private double loadingBarPercent;
 	private int loadingBarHeight;
 	boolean mouseDown;
 	boolean negative;
@@ -28,7 +29,7 @@ public class GUI implements ComponentListener, MouseListener {
 	private JPanel controlPanel;
 	private JPanel artPanel;
 	private JPanel allButFilePanel;
-    private JPanel tagPanel;
+    private JPanel loadingPanel;
 	private JLabel fileButton;
 	private JLabel negToggleButton;
 	private JLabel settingsButton;
@@ -39,6 +40,7 @@ public class GUI implements ComponentListener, MouseListener {
 	private JLabel printButton;
 	private JLabel controlsTag;
 	private JLabel loadingBar;
+	private JLabel loadingPercentDisplay;
 
 	private JTextField widthInput;
 	private JTextField heightInput;
@@ -54,7 +56,8 @@ public class GUI implements ComponentListener, MouseListener {
 	private Border inputErrorHilight;
 	private Border tagBorder;
 
-	private Dimension controlsTagDimen;
+	private Dimension loadingPanelDimen;
+	private Dimension loadingBarDimen;
 	private Clipboard myClipboard;
 	private StringSelection artCopyPasteItem;
 	private int minGuiWidth;
@@ -73,8 +76,11 @@ public class GUI implements ComponentListener, MouseListener {
 		minGuiWidth = 150;
 		inputBorderThickness = 3;
 		tagBorderThickness = 5;
-		loadingDivisor = 50;
+		loadingSections = 50;
+		loadingBarPercent = 0.0;
 		loadingBarHeight = 10;
+
+		loadingPanelDimen = new Dimension(0, 0);
 
 		frame = new JFrame("ASCII Art Generator");
 		frame.setBounds(0, 0, 800, 600);
@@ -89,6 +95,7 @@ public class GUI implements ComponentListener, MouseListener {
 		layeredArtPane = new JLayeredPane();
         layeredArtPane.setLayout(null);
         layeredArtPane.setBackground(Color.BLACK);
+
 		fileButton = new JLabel("Choose a File", JLabel.CENTER);
 		fileButton.setMinimumSize(new Dimension(0, GuiConstants.fileButtonHeight));
 		fileButton.setMaximumSize(new Dimension(1000000, GuiConstants.fileButtonHeight));
@@ -128,7 +135,7 @@ public class GUI implements ComponentListener, MouseListener {
 		artPanel.setBackground(Colors.artPanel_PB);
 		//artPanel.setRequestFocusEnabled(true);
 		artPanel.addMouseListener(this);
-		
+
 		
 		//controlPanel.setPreferredSize(new Dimension(200, 600));
         layeredArtPane.setBounds(controlPanel.getWidth(), 0,
@@ -136,11 +143,12 @@ public class GUI implements ComponentListener, MouseListener {
                 frame.getHeight() - frame.getInsets().top - GuiConstants.fileButtonHeight);
         layeredArtPane.add(artScrollPane, new Integer(0));
         //layeredArtPane.add(controlsTag, new Integer(1));
-
+		//generateLoadingBar();
 		allButFilePanel.add(controlPanel);
 		allButFilePanel.add(layeredArtPane);
 		mainPanel.add(fileButton);
 		mainPanel.add(allButFilePanel);
+		//mainPanel.add(loadingPanel);
         //mainPanel.add(controlsTag);
 
 		frame.addComponentListener(new ComponentAdapter() {
@@ -149,9 +157,9 @@ public class GUI implements ComponentListener, MouseListener {
 					
 					frame.setSize(GuiConstants.minControlPanelWidth * 2, frame.getHeight());
 				}
-				if(frame.getHeight() < GuiConstants.minControlPanelHeight) {
+				if(frame.getHeight() < GuiConstants.minControlPanelHeight + GuiConstants.fileButtonHeight) {
 					
-					frame.setSize(frame.getWidth(), GuiConstants.minControlPanelHeight);
+					frame.setSize(frame.getWidth(), GuiConstants.minControlPanelHeight + GuiConstants.fileButtonHeight);
 				}
 				if(allButFilePanel.getWidth() > (GuiConstants.maxControlPanelWidth * GuiConstants.controlPanelWR)) {
 					controlPanel.setBounds(0, 0, 
@@ -183,6 +191,7 @@ public class GUI implements ComponentListener, MouseListener {
 		artPanel.requestFocus();
 		//printButton.setSize(printButton.getWidth(), printButton.getHeight() + frame.getInsets().top);
 		//artScrollPane.setSize(artScrollPane.getWidth(), artScrollPane.getHeight() - frame.getInsets().top);
+		//showLoadingBar(true);
 	}
 	public static JFrame getFrame() {
 		return frame;
@@ -215,56 +224,58 @@ public class GUI implements ComponentListener, MouseListener {
 		*/
 		settingsButton.setFont(Fonts.iconSet);
 		settingsButton.setBackground(Colors.settingsButton_PB);
-		settingsButton.setForeground(Colors.button_PF);
+		settingsButton.setForeground(Colors.icon_F);
 		//settingsButton.setFont(Fonts.ButtonText);
 		settingsButton.setOpaque(true);
 		settingsButton.addMouseListener(this);
 		
 		
-		negToggleButton = new JLabel("", JLabel.CENTER);
+		negToggleButton = new JLabel((char)0x25D0 + "", JLabel.CENTER);
 		negToggleButton.setBounds(settingsButton.getWidth(), 0, 
 				controlPanel.getWidth() - settingsButton.getWidth(), 
 				controlPanel.getHeight() / GuiConstants.controlSet1HR);
 		negToggleButton.setBackground(Colors.negToggleButton_PB);
-		negToggleButton.setForeground(Colors.button_PF);
-		negToggleButton.setFont(Fonts.ButtonText);
+		negToggleButton.setForeground(Colors.icon_F);
+		negToggleButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
+		negToggleButton.setVerticalAlignment(SwingConstants.CENTER);
 		negToggleButton.setOpaque(true);
 		negToggleButton.addMouseListener(this);
 		
-		zoomInButton = new JLabel("", JLabel.CENTER);
+		zoomInButton = new JLabel("+", JLabel.CENTER);
 		zoomInButton.setBackground(colors.zoomInButton_P);
-		zoomInButton.setForeground(colors.button_PF);
-		zoomInButton.setFont(Fonts.ButtonText);
+		zoomInButton.setForeground(colors.icon_F);
+		zoomInButton.setFont(new Font("Heiti SC", Font.CENTER_BASELINE, 62));
 		zoomInButton.setOpaque(true);
 		zoomInButton.setBounds(0, settingsButton.getHeight(), 
 				(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR, 
 				(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
+
 		zoomInButton.addMouseListener(this);
 		
-		zoomOutButton = new JLabel("", JLabel.CENTER);
+		zoomOutButton = new JLabel("-", JLabel.CENTER);
 		zoomOutButton.setBackground(colors.zoomOutButton_P);
-		zoomOutButton.setForeground(colors.button_PF);
-		zoomOutButton.setFont(Fonts.ButtonText);
+		zoomOutButton.setForeground(colors.icon_F);
+		zoomOutButton.setFont(new Font("Heiti SC", Font.CENTER_BASELINE, 62));
 		zoomOutButton.setOpaque(true);
 		zoomOutButton.setBounds(0, zoomInButton.getY() + zoomInButton.getHeight(), 
 				(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR, 
 				(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
 		zoomOutButton.addMouseListener(this);
 		
-		clipboardButton = new JLabel("", JLabel.CENTER);
+		clipboardButton = new JLabel("\u21EA", JLabel.CENTER);
 		clipboardButton.setBackground(colors.clipboardButton_P);
-		clipboardButton.setForeground(colors.button_PF);
-		clipboardButton.setFont(Fonts.ButtonText);
+		clipboardButton.setForeground(colors.icon_F);
+		clipboardButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
 		clipboardButton.setOpaque(true);
 		clipboardButton.setBounds(zoomInButton.getX() + zoomInButton.getWidth(), settingsButton.getHeight(), 
 				controlPanel.getWidth() - zoomInButton.getWidth(), 
 				zoomInButton.getHeight() + zoomOutButton.getHeight());
 		clipboardButton.addMouseListener(this);
 		
-		useDefaultDimenButton = new JLabel("", JLabel.CENTER);
+		useDefaultDimenButton = new JLabel("<html>▲<br/>▼<html>", JLabel.CENTER);
 		useDefaultDimenButton.setBackground(colors.useDefaultDimenButton_P);
-		useDefaultDimenButton.setForeground(colors.button_PF);
-		useDefaultDimenButton.setFont(Fonts.ButtonText);
+		useDefaultDimenButton.setForeground(colors.icon_F);
+		useDefaultDimenButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
 		useDefaultDimenButton.setOpaque(true);
 		useDefaultDimenButton.setBounds(0, zoomOutButton.getY() + zoomOutButton.getHeight(), 
 				controlPanel.getWidth() / GuiConstants.defaultDimenButtonWR, 
@@ -311,10 +322,10 @@ public class GUI implements ComponentListener, MouseListener {
 				useDefaultDimenButton.getHeight());
 		maxCharInput.addMouseListener(this);
 
-		printButton = new JLabel("", JLabel.CENTER);
+		printButton = new JLabel("a", JLabel.CENTER);
 		printButton.setBackground(colors.printButton_P);
 		printButton.setForeground(colors.button_PF);
-		printButton.setFont(Fonts.ButtonText);
+		printButton.setFont(new Font("Webdings", Font.CENTER_BASELINE, 100));
 		printButton.setOpaque(true);
 		printButton.setLocation(0, useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight());
 		printButton.setBounds(0, useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight(), 
@@ -370,12 +381,79 @@ public class GUI implements ComponentListener, MouseListener {
 				frame.getWidth() - controlPanel.getWidth(),
 				frame.getHeight() - frame.getInsets().top - GuiConstants.fileButtonHeight);
 	}
+	public void generateLoadingBar() {
+
+		loadingPanel = new JPanel();
+		loadingPanel.setLayout(new BoxLayout(loadingPanel, BoxLayout.PAGE_AXIS));
+
+		loadingPanelDimen.setSize(frame.getWidth(), loadingBarHeight);
+		loadingPanel.setMinimumSize(loadingPanelDimen);
+		loadingPanel.setPreferredSize(loadingPanelDimen);
+		loadingPanel.setMaximumSize(loadingPanelDimen);
+		loadingPanel.setBackground(Colors.loadingBarPanel);
+
+		loadingBarDimen = new Dimension(frame.getWidth(), 0);
+		loadingBar = new JLabel();
+		loadingBar.setMinimumSize(loadingBarDimen);
+		loadingBar.setPreferredSize(loadingBarDimen);
+		loadingBar.setMaximumSize(loadingBarDimen);
+		loadingBar.setBackground(Colors.loadingBar);
+		loadingBar.setOpaque(true);
+
+		loadingPercentDisplay = new JLabel();
+		loadingPercentDisplay.setForeground(Colors.button_PF);
+		loadingPercentDisplay.setBounds(0, 0, 0, 0);
+		loadingPercentDisplay.setFont(Fonts.loadingText);
+
+		loadingPanel.add(loadingBar);
+		//loadingPanel.add(loadingPercentDisplay);
+	}
 	public static void setArt(String art) {
 		artViewer.setText(art);
 		artViewer.repaint();
 	}
-	public int getLoadingDivisor() {
-		return loadingDivisor;
+
+	public void setLoadingStatus(int loadingStatus) {
+		loadingBarDimen.setSize((int)((double)loadingPanel.getWidth() * ((double)loadingStatus / (double)loadingSections)), loadingPanel.getHeight());
+		loadingBar.setMinimumSize(loadingBarDimen);
+		loadingBar.setPreferredSize(loadingBarDimen);
+		loadingBar.setMaximumSize(loadingBarDimen);
+		//loadingPercentDisplay.setText(Math.round((((double)loadingStatus / loadingSections)) * 100.0) / 100.0 + "%");
+		loadingBar.repaint();
+		//mainPanel.repaint();
+		//loadingPercentDisplay.repaint();
+	}
+	public void showLoadingBar(boolean show) {
+		if(show) {
+//			loadingPanelDimen.setSize(frame.getWidth(), loadingBarHeight);
+//			loadingPanel.setMinimumSize(loadingPanelDimen);
+//			loadingPanel.setPreferredSize(loadingPanelDimen);
+//			loadingPanel.setMaximumSize(loadingPanelDimen);
+//			loadingPercentDisplay.setSize(loadingPanelDimen);
+//
+//			//frame.setSize(frame.getWidth(), frame.getHeight() + loadingBarHeight);
+//			loadingPanel.revalidate();
+//			loadingPanel.repaint();
+//			//allButFilePanel.setSize(allButFilePanel.getWidth(), allButFilePanel.getHeight() - loadingBarHeight);
+//			allButFilePanel.revalidate();
+//			allButFilePanel.repaint();
+			mainPanel.add(loadingPanel);
+			mainPanel.revalidate();
+			mainPanel.repaint();
+		}
+		else {
+//			loadingPanelDimen.setSize(0, 0);
+//			loadingPanel.setMinimumSize(loadingPanelDimen);
+//			loadingPanel.setPreferredSize(loadingPanelDimen);
+//			loadingPanel.setMaximumSize(loadingPanelDimen);
+//			loadingPercentDisplay.setSize(loadingPanelDimen);
+//			//frame.setSize(frame.getWidth(), frame.getHeight() - loadingBarHeight);
+//			loadingPanel.revalidate();
+//			loadingPanel.repaint();
+			mainPanel.remove(loadingPanel);
+			mainPanel.revalidate();
+			mainPanel.repaint();
+		}
 	}
 	public int getDimensionInput(String input) {
 		if(input.length() == 0) {
@@ -435,52 +513,41 @@ public class GUI implements ComponentListener, MouseListener {
     }
 	@Override
 	public void componentResized(ComponentEvent e) {
-		//control1.setBounds(0, 0, controlPanel.getWidth(), controlPanel.getHeight() / 6);
-		//settingsImg = null;
-		settingsButton.setBounds(0, 0, 
-				controlPanel.getWidth() / GuiConstants.settingsButtonWR, 
-				controlPanel.getHeight() / GuiConstants.controlSet1HR);
-		/*
-		settingsImg = new ImageIcon(
-				new ImageIcon("Resources/AsciiSettingsIcon.png")
-				.getImage().getScaledInstance(
-						Math.min(settingsButton.getWidth(), settingsButton.getHeight()) - smallButtonPadding, 
-						Math.min(settingsButton.getWidth(), settingsButton.getHeight()) - smallButtonPadding, 
-						Image.SCALE_DEFAULT));
-		settingsButton.setIcon(settingsImg);
-		settingsButton.repaint();
-		*/
-		negToggleButton.setBounds(settingsButton.getWidth(), 0, 
-				controlPanel.getWidth() - settingsButton.getWidth(), 
-				controlPanel.getHeight() / GuiConstants.controlSet1HR);
-		zoomInButton.setBounds(0, settingsButton.getHeight(), 
-				(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR, 
-				(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
-		zoomOutButton.setBounds(0, zoomInButton.getY() + zoomInButton.getHeight(), 
-				(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR, 
-				(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
-		clipboardButton.setBounds(zoomInButton.getX() + zoomInButton.getWidth(), settingsButton.getHeight(), 
-				controlPanel.getWidth() - zoomInButton.getWidth(), 
-				zoomInButton.getHeight() + zoomOutButton.getHeight());
-		useDefaultDimenButton.setBounds(0, zoomOutButton.getY() + zoomOutButton.getHeight(), 
-				controlPanel.getWidth() / GuiConstants.defaultDimenButtonWR, 
-				controlPanel.getHeight() / GuiConstants.controlSet3HR);
 
-		widthInput.setBounds(useDefaultDimenButton.getWidth(), zoomOutButton.getY() + zoomOutButton.getHeight(),
-                controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
-                useDefaultDimenButton.getHeight() / 2);
-		heightInput.setBounds(useDefaultDimenButton.getWidth(), widthInput.getY() + widthInput.getHeight(),
-                controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
-                useDefaultDimenButton.getHeight() - widthInput.getHeight());
+		if(frame.getHeight() >= GuiConstants.minControlPanelHeight + GuiConstants.fileButtonHeight) {
+			settingsButton.setBounds(0, 0,
+					controlPanel.getWidth() / GuiConstants.settingsButtonWR,
+					controlPanel.getHeight() / GuiConstants.controlSet1HR);
+			negToggleButton.setBounds(settingsButton.getWidth(), 0,
+					controlPanel.getWidth() - settingsButton.getWidth(),
+					controlPanel.getHeight() / GuiConstants.controlSet1HR);
+			zoomInButton.setBounds(0, settingsButton.getHeight(),
+					(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR,
+					(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
+			zoomOutButton.setBounds(0, zoomInButton.getY() + zoomInButton.getHeight(),
+					(controlPanel.getWidth() / GuiConstants.clipboardButtonWR) * GuiConstants.zoomButtonWR,
+					(controlPanel.getHeight() / (GuiConstants.controlSet2HR * 2)) * 3);
+			clipboardButton.setBounds(zoomInButton.getX() + zoomInButton.getWidth(), settingsButton.getHeight(),
+					controlPanel.getWidth() - zoomInButton.getWidth(),
+					zoomInButton.getHeight() + zoomOutButton.getHeight());
+			useDefaultDimenButton.setBounds(0, zoomOutButton.getY() + zoomOutButton.getHeight(),
+					controlPanel.getWidth() / GuiConstants.defaultDimenButtonWR,
+					controlPanel.getHeight() / GuiConstants.controlSet3HR);
+			widthInput.setBounds(useDefaultDimenButton.getWidth(), zoomOutButton.getY() + zoomOutButton.getHeight(),
+					controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
+					useDefaultDimenButton.getHeight() / 2);
+			heightInput.setBounds(useDefaultDimenButton.getWidth(), widthInput.getY() + widthInput.getHeight(),
+					controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
+					useDefaultDimenButton.getHeight() - widthInput.getHeight());
 
-		maxCharInput.setBounds(useDefaultDimenButton.getWidth(), useDefaultDimenButton.getY(),
-                controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
-                useDefaultDimenButton.getHeight());
+			maxCharInput.setBounds(useDefaultDimenButton.getWidth(), useDefaultDimenButton.getY(),
+					controlPanel.getWidth() - useDefaultDimenButton.getWidth(),
+					useDefaultDimenButton.getHeight());
 
-		printButton.setBounds(0, useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight(), 
-				controlPanel.getWidth(), 
-				controlPanel.getHeight() - (useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight()));
-		
+			printButton.setBounds(0, useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight(),
+					controlPanel.getWidth(),
+					controlPanel.getHeight() - (useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight()));
+		}
 	}
 
 	
@@ -602,8 +669,8 @@ public class GUI implements ComponentListener, MouseListener {
 			useDefaultDimenButton.repaint();
 		}
 		else if(e.getSource() == printButton) {
-			printButton.setBackground(Colors.printButtonClick_P);
-			printButton.repaint();
+			//printButton.setBackground(Colors.printButtonClick_P);
+			//printButton.repaint();
 		}
 		else if(e.getSource() == fileButton) {
 			fileButton.setBackground(Colors.buttonClick_P);

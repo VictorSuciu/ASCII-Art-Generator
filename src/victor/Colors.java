@@ -8,6 +8,7 @@ public class Colors {
 	//B = Background, F = Foreground
 
 	static Color button_PF = new Color(0xd8d8d8);
+	static Color icon_F = new Color(0x9FA3A6);
 	static Color controlPanel_P = new Color(0x676767);
 	static Color artPanel_PB = new Color(0xEBEDF1);
 	static Color artPanel_PF = new Color(0x000000);
@@ -36,6 +37,8 @@ public class Colors {
 	static Color buttonClick_P = new Color(0x26ad6e);
 	static Color printButtonHighlight_P = new Color(0x01b765);
 	static Color printButtonClick_P = new Color(0x30a563);
+    static Color loadingBar = new Color(0x0bb774);
+    static Color loadingBarPanel = new Color(0x58595C);
 
 
 

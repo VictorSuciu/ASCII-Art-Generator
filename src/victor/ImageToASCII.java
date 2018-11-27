@@ -20,6 +20,8 @@ public class ImageToASCII {
 	static boolean negative;
 	static int imageWidth;
 	static int imageHeight;
+	static int loadingDivisor;
+	static int totalPixels;
 	public static void generate(File imageFile, int maxChars, boolean neg) {
 		System.out.println("MC");
 		//maxChars /= 2;
@@ -80,16 +82,21 @@ public class ImageToASCII {
 
 	}
 	public static void generateArtString(int width) {
+	    int loadingStatus = 0;
 		int pixelSize = scaledImage.getWidth() / width;
 		double truePixelSize = (double)scaledImage.getWidth() / (double)width;
 		char pixel = ' ';
-		
+		totalPixels = 0;
+
 		int pixelSizeCounterX = 0;
 		double truePixelSizeCounterX = 0.0;
 		int pixelSizeCounterY = 0;
 		double truePixelSizeCounterY = 0.0;
 		int tempPixel = 0;
 		int avgLightValue = 0;
+
+		//ArtGenerator.myGUI.showLoadingBar(true);
+
 		for(int y = 0; y < scaledImage.getHeight(); y++) {
 			for(int x = 0; x < scaledImage.getWidth(); x++) {
 				tempPixel = scaledImage.getRGB(x, y);
@@ -108,34 +115,12 @@ public class ImageToASCII {
 				else {
 					pixel = charPixels[avgLightValue / ((255 / charPixels.length) + 1)];
 				}
-
-				/*
-				if(truePixelSizeCounterY - (double)pixelSizeCounterY >= 1.0) {
-					if(truePixelSizeCounterX - (double)pixelSizeCounterX >= 1.0) {
-						pixel = getPixel(pixelSizeCounterX, y * pixelSize, pixelSize + 1, pixelSize + 1);
-						pixelSizeCounterX++;
-						pixelSizeCounterY++;
-					}
-					else {
-						pixel = getPixel(pixelSizeCounterX, y * pixelSize, pixelSize, pixelSize + 1);
-						pixelSizeCounterY++;
-					}
-				}
-				else {
-					if(truePixelSizeCounterX - (double)pixelSizeCounterX >= 1.0) {
-						pixel = getPixel(pixelSizeCounterX, y * pixelSize, pixelSize + 1, pixelSize);
-						pixelSizeCounterX++;
-					}
-					else {
-						pixel = getPixel(pixelSizeCounterX, y * pixelSize, pixelSize, pixelSize);
-					}
-				}
-				*/
-				//pixelSizeCounterX += pixelSize;
-				//truePixelSizeCounterX += truePixelSize;
-				//System.out.print(pixel);
-				//System.out.print(pixel);
-
+                if(((x + 1) * (y * 1)) % ((imageWidth * imageHeight) / ArtGenerator.myGUI.loadingSections) == 0) {
+                    System.out.println("UPDATE LOADING BAR " + loadingStatus);
+                    ArtGenerator.myGUI.setLoadingStatus(loadingStatus);
+                    loadingStatus++;
+                }
+                totalPixels++;
 				art += pixel + "" + pixel + "" + pixel;
 
 			}
@@ -148,7 +133,7 @@ public class ImageToASCII {
 			//pixelSizeCounterY += pixelSize;
 			//truePixelSizeCounterY += truePixelSize;
 		}
-		
+        ArtGenerator.myGUI.showLoadingBar(false);
 		//System.out.println(art);
 	}
 	public static char getPixel(int imgX, int imgY, int pixelSizeX, int pixelSizeY) {
