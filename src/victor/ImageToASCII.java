@@ -117,7 +117,7 @@ public class ImageToASCII {
 				}
                 if(((x + 1) * (y * 1)) % ((imageWidth * imageHeight) / ArtGenerator.myGUI.loadingSections) == 0) {
                     System.out.println("UPDATE LOADING BAR " + loadingStatus);
-                    ArtGenerator.myGUI.setLoadingStatus(loadingStatus);
+                    //ArtGenerator.myGUI.setLoadingStatus(loadingStatus);
                     loadingStatus++;
                 }
                 totalPixels++;
@@ -133,7 +133,7 @@ public class ImageToASCII {
 			//pixelSizeCounterY += pixelSize;
 			//truePixelSizeCounterY += truePixelSize;
 		}
-        ArtGenerator.myGUI.showLoadingBar(false);
+        //ArtGenerator.myGUI.showLoadingBar(false);
 		//System.out.println(art);
 	}
 	public static char getPixel(int imgX, int imgY, int pixelSizeX, int pixelSizeY) {
