@@ -19,6 +19,7 @@ the image proportional.
 will stretch, shrink, compress, or warp the ASCII image to fit your
 specifications.
 
+-----
 
 #### Target Character Sizing Option
 
@@ -32,6 +33,7 @@ will never have more characters than the target number. The image
 This feature is useful for text messaging services that have a maximum
 character limit, such as Discord with a max character limit of 2000.
 
+-----
 
 #### Positive and Negative Control
 
@@ -41,20 +43,35 @@ on the light background, and a negative image on a dark background. This
 allows you to retain the original lights and darks of the image no matter
 what background color your artwork will be displayed on.
 
+-----
+
 #### Zooming
 
 The UI allows you to zoom in and out on your artwork to adjust for size
 within the viewing window.
 
+-----
 
 ## Showcase and Examples
 
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle.png "Original Image")
 
+> Original Image
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Triangle.png "ASCII Art Inside Application")
+
+> ASCII image generated from the original image file
+
+-----
 
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/DistortedEmoji-After.jpg "Original Image")
 
+> Original Image
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Light.png "Positive Background")
 
+> ASCII image on a positive (light) background
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Dark.png "Negative Background")
+
+> ASCII image on a negative (dark) background
