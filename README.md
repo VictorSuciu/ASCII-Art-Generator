@@ -49,4 +49,12 @@ within the viewing window.
 
 ## Showcase and Examples
 
-![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle.png)
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle.png "Original Image")
+
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Triangle.png "ASCII Art Inside Application")
+
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/DistortedEmoji-After.jpg "Original Image")
+
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Light.png "Positive Background")
+
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Dark.png "Negative Background")
