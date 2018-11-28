@@ -58,19 +58,23 @@ within the viewing window.
 
 > Original Image
 
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Triangle.png "ASCII Art Inside Application")
 
 > ASCII image generated from the original image file
 
 -----
 
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/DistortedEmoji-After.jpg "Original Image")
 
 > Original Image
 
+
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Light.png "Positive Background")
 
 > ASCII image on a positive (light) background
+
 
 ![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Smiley-Dark.png "Negative Background")
 
