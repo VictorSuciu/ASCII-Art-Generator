@@ -29,8 +29,8 @@ public class ArtGenerator {
 			e.printStackTrace();
 		}
 		myGUI = new GUI();
-		ArtGenerator.myGUI.showLoadingBar(true);
-		ArtGenerator.myGUI.setLoadingStatus(25);
+		//ArtGenerator.myGUI.showLoadingBar(true);
+		//ArtGenerator.myGUI.setLoadingStatus(25);
 		//new SettingsGUI();
 		//ImageToASCII.generate(filePath);
 	}
