@@ -54,13 +54,13 @@ within the viewing window.
 
 ## Showcase and Examples
 
-![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle1.png "Original Image")
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle.png "Original Image")
 
 > Original Image
 
 <br/>
 
-![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-Triangle.png "ASCII Art Inside Application")
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ASCII-App-ImpossibleTriangle1.png "ASCII Art Inside Application")
 
 > ASCII image generated from the original image file
 
