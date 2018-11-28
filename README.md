@@ -8,7 +8,7 @@ ASCII art creation than many other tools and web apps.
 
 ## Features
 
-#### Limitless Width/Height Adjustment 
+#### Versatile Width/Height Adjustment 
 You can adjust the width and height of the generated ASCII art 
 in any way imaginable given the width and height input boxes. 
 - Only input one of the two dimensions, such as only width. The
@@ -21,7 +21,7 @@ specifications.
 
 -----
 
-#### Target Character Sizing Option
+#### Target Character Limit Sizing Option
 
 Alternatively, you can enter a 'target character number' to specify
 the size of the ASCII art. This option takes a number (such as 5000),
