@@ -54,7 +54,7 @@ within the viewing window.
 
 ## Showcase and Examples
 
-![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle.png "Original Image")
+![Alt text](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/ImpossibleTriangle1.png "Original Image")
 
 > Original Image
 

@@ -35,8 +35,8 @@ public class ImageToASCII {
 			e.printStackTrace();
 		}
 
-		imageWidth = (int)(Math.sqrt((double)(maxChars * image.getWidth()) / (image.getHeight() * 3.0)));
-		imageHeight = (int)(Math.sqrt((double)(maxChars * image.getHeight()) / (image.getWidth() * 3.0)));
+		imageWidth = (int)(Math.sqrt((double)(maxChars * image.getWidth()) / (image.getHeight() * 2.0)));
+		imageHeight = (int)(Math.sqrt((double)(maxChars * image.getHeight()) / (image.getWidth() * 2.0)));
 		outputArt();
 	}
 	public static void generate(File imageFile, int width, int height, boolean neg) {
@@ -121,7 +121,7 @@ public class ImageToASCII {
                     loadingStatus++;
                 }
                 totalPixels++;
-				art += pixel + "" + pixel + "" + pixel;
+				art += pixel + "" + pixel;
 
 			}
 			//System.out.println(art.length());
