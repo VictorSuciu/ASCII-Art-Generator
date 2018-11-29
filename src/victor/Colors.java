@@ -16,9 +16,9 @@ public class Colors {
 	static Color artPanel_NF = new Color(0xEDEFF2);
 
 	static Color transparent = new Color(0x00000000);
-	static Color fileButton_PB = new Color(0x424245);
-	static Color settingsButton_PB = new Color(0x636363);
-	static Color negToggleButton_PB = new Color(0x727272);
+	static Color fileButton_PB = new Color(0x2B2F37);
+	static Color settingsButton_PB = new Color(0x3C3C3C);
+	static Color negToggleButton_PB = new Color(0x464646);
 	static Color negToggleButton_PF = new Color(0xd8d8d8);
 	static Color zoomInButton_P = new Color(0x898989);
 	static Color zoomOutButton_P = new Color(0x797979);
@@ -55,4 +55,24 @@ public class Colors {
 	//static Color tabColorFocused_B = new Color(0x3A4457);
 	static Color tabColorFocused_F = new Color(0x5B5D63);
 
+	public static Color getIconColor(Color c) {
+		int changeValueMax = 30;
+		int changeValueMin = 0;
+
+		int r = c.getRed();
+		int g = c.getGreen();
+		int b = c.getBlue();
+		int avg = (r + g + b) / 3;
+		int changeValue = (int)((changeValueMax - changeValueMin) * Math.cos(avg / 1024.0)) + changeValueMin;
+
+		r += changeValue;
+		g += changeValue;
+		b += changeValue;
+
+		int iconColorValue = ((b <= 255 ? b : 255) << 16) + ((g <= 255 ? g : 255) << 8) + (r <= 255 ? r : 255);
+
+		Color iconColor = new Color(iconColorValue);
+
+		return iconColor;
+	}
 }

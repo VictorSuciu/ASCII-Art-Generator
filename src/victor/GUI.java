@@ -224,7 +224,7 @@ public class GUI implements ComponentListener, MouseListener {
 		*/
 		settingsButton.setFont(Fonts.iconSet);
 		settingsButton.setBackground(Colors.settingsButton_PB);
-		settingsButton.setForeground(Colors.icon_F);
+		settingsButton.setForeground(Colors.getIconColor(Colors.settingsButton_PB));
 		//settingsButton.setFont(Fonts.ButtonText);
 		settingsButton.setOpaque(true);
 		settingsButton.addMouseListener(this);
@@ -235,15 +235,15 @@ public class GUI implements ComponentListener, MouseListener {
 				controlPanel.getWidth() - settingsButton.getWidth(), 
 				controlPanel.getHeight() / GuiConstants.controlSet1HR);
 		negToggleButton.setBackground(Colors.negToggleButton_PB);
-		negToggleButton.setForeground(Colors.icon_F);
+		negToggleButton.setForeground(Colors.getIconColor(Colors.negToggleButton_PB));
 		negToggleButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
 		negToggleButton.setVerticalAlignment(SwingConstants.CENTER);
 		negToggleButton.setOpaque(true);
 		negToggleButton.addMouseListener(this);
 		
 		zoomInButton = new JLabel("+", JLabel.CENTER);
-		zoomInButton.setBackground(colors.zoomInButton_P);
-		zoomInButton.setForeground(colors.icon_F);
+		zoomInButton.setBackground(Colors.zoomInButton_P);
+		zoomInButton.setForeground(Colors.getIconColor(Colors.zoomInButton_P));
 		zoomInButton.setFont(new Font("Heiti SC", Font.CENTER_BASELINE, 62));
 		zoomInButton.setOpaque(true);
 		zoomInButton.setBounds(0, settingsButton.getHeight(), 
@@ -253,8 +253,8 @@ public class GUI implements ComponentListener, MouseListener {
 		zoomInButton.addMouseListener(this);
 		
 		zoomOutButton = new JLabel("-", JLabel.CENTER);
-		zoomOutButton.setBackground(colors.zoomOutButton_P);
-		zoomOutButton.setForeground(colors.icon_F);
+		zoomOutButton.setBackground(Colors.zoomOutButton_P);
+		zoomOutButton.setForeground(Colors.getIconColor(Colors.zoomOutButton_P));
 		zoomOutButton.setFont(new Font("Heiti SC", Font.CENTER_BASELINE, 62));
 		zoomOutButton.setOpaque(true);
 		zoomOutButton.setBounds(0, zoomInButton.getY() + zoomInButton.getHeight(), 
@@ -263,8 +263,8 @@ public class GUI implements ComponentListener, MouseListener {
 		zoomOutButton.addMouseListener(this);
 		
 		clipboardButton = new JLabel("\u21EA", JLabel.CENTER);
-		clipboardButton.setBackground(colors.clipboardButton_P);
-		clipboardButton.setForeground(colors.icon_F);
+		clipboardButton.setBackground(Colors.clipboardButton_P);
+		clipboardButton.setForeground(Colors.getIconColor(Colors.clipboardButton_P));
 		clipboardButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
 		clipboardButton.setOpaque(true);
 		clipboardButton.setBounds(zoomInButton.getX() + zoomInButton.getWidth(), settingsButton.getHeight(), 
@@ -273,8 +273,8 @@ public class GUI implements ComponentListener, MouseListener {
 		clipboardButton.addMouseListener(this);
 		
 		useDefaultDimenButton = new JLabel("<html>▲<br/>▼<html>", JLabel.CENTER);
-		useDefaultDimenButton.setBackground(colors.useDefaultDimenButton_P);
-		useDefaultDimenButton.setForeground(colors.icon_F);
+		useDefaultDimenButton.setBackground(Colors.useDefaultDimenButton_P);
+		useDefaultDimenButton.setForeground(Colors.getIconColor(Colors.useDefaultDimenButton_P));
 		useDefaultDimenButton.setFont(new Font("Arial", Font.CENTER_BASELINE, 42));
 		useDefaultDimenButton.setOpaque(true);
 		useDefaultDimenButton.setBounds(0, zoomOutButton.getY() + zoomOutButton.getHeight(), 
@@ -311,8 +311,8 @@ public class GUI implements ComponentListener, MouseListener {
 
 		maxCharInput = new JTextField("");
 		maxCharInput.setHorizontalAlignment(JTextField.CENTER);
-		maxCharInput.setBackground(colors.maxCharInput_P);
-		maxCharInput.setForeground(colors.button_PF);
+		maxCharInput.setBackground(Colors.maxCharInput_P);
+		maxCharInput.setForeground(Colors.button_PF);
 		maxCharInput.setBorder(maxCharInputBorder);
 		maxCharInput.setFont(Fonts.ButtonText);
 		maxCharInput.setCaretColor(Colors.button_PF);
@@ -323,8 +323,8 @@ public class GUI implements ComponentListener, MouseListener {
 		maxCharInput.addMouseListener(this);
 
 		printButton = new JLabel("a", JLabel.CENTER);
-		printButton.setBackground(colors.printButton_P);
-		printButton.setForeground(colors.button_PF);
+		printButton.setBackground(Colors.printButton_P);
+		printButton.setForeground(Colors.button_PF);
 		printButton.setFont(new Font("Webdings", Font.CENTER_BASELINE, 100));
 		printButton.setOpaque(true);
 		printButton.setLocation(0, useDefaultDimenButton.getY() + useDefaultDimenButton.getHeight());
@@ -367,6 +367,7 @@ public class GUI implements ComponentListener, MouseListener {
 		artViewer.setBackground(colors.artPanel_PB);
 		artViewer.setForeground(colors.artPanel_PF);
 		artViewer.setFont(Fonts.artFont);
+		artViewer.setBorder(BorderFactory.createEmptyBorder());
 		artViewer.setOpaque(true);
 		artViewer.setEditable(false);
 		//artViewer.setWrapStyleWord(false);
