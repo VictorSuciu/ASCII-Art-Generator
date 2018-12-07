@@ -10,7 +10,7 @@ public class Fonts {
     static Font loadingText = new Font("Hiragino Sans", Font.CENTER_BASELINE, 22);
     static Font tagText = new Font("Hiragino Sans", Font.CENTER_BASELINE, 16);
 	static Font artFont = new Font(artFontString, Font.BOLD, 4);
-
+//
 
 
 	static Font tabText = new Font("Hiragino Sans", Font.CENTER_BASELINE, 24);

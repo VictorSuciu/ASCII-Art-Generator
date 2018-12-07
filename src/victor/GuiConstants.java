@@ -10,7 +10,7 @@ public class GuiConstants {
 	static final int controlSet1HR = 8;
 	static final int controlSet2HR = 8;
 	static final int controlSet3HR = 4;
-	
+	//
 	static final int settingsButtonWR = 3;
 	static final int negToggleButtonWR = settingsButtonWR > 1 ? 
 												settingsButtonWR - 1 : 0;

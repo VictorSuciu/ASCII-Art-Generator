@@ -47,7 +47,7 @@ public class Colors {
 	static Color settingInput_B = new Color(0xBBC1C8);
 	static Color settingInput_F = new Color(0x52545A);
 	static Color tabColorFocused_F = new Color(0x5B5D63);
-
+//
 	public static Color getIconColor(Color c) {
 		int changeValueMax = 30;
 		int changeValueMin = 0;

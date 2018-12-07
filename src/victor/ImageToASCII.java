@@ -89,7 +89,7 @@ public class ImageToASCII {
 				if(tempPixel >> 24 == 0) {
 					avgLightValue = negative ? 0 : 255;
 				}
-				else {
+				else {//
 					avgLightValue = (((tempPixel >> 16) & 0xFF) +
 							((tempPixel >> 8) & 0xFF) +
 							((tempPixel) & 0xFF)) / 3;
