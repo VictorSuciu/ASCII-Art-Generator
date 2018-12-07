@@ -7,7 +7,7 @@ It has a few UI features that allow for more powerful and customizable
 ASCII art creation than many other tools and web apps.
 
 {% raw %}
-<button onclick="window.open('https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/Downloads/ASCII-Art-Maker.jar')">Download Here</button>
+<button onclick="window.open('https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/Downloads/ASCII-Art-Maker.jar')">Download</button>
 {% endraw %}
 
 ## Features
