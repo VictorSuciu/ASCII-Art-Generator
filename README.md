@@ -6,7 +6,14 @@ This is a small application that converts image files into ASCII text.
 It has a few UI features that allow for more powerful and customizable
 ASCII art creation than many other tools and web apps.
 
-##[Download Here](https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/Downloads/ASCII-Art-Maker.jar)
+<html>
+    <head>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>  
+    </head>
+    <body>
+        <a class="github-button" href="https://github.com/VictorSuciu/README-Assets/blob/master/ASCII/Downloads/ASCII-Art-Maker.jar" data-icon="octicon-cloud-download" data-size="large" aria-label="Download ASCII Art Generator">Download</a>
+    </body>
+</html>
 
 ## Features
 
