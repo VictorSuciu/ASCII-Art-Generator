@@ -22,7 +22,6 @@ public class ImageToASCII {
 	static int loadingDivisor;
 	static int totalPixels;
 	public static void generate(File imageFile, int maxChars, boolean neg) {
-		System.out.println("MC");
 		negative = neg;
 		art = "";
 		try {
@@ -37,7 +36,6 @@ public class ImageToASCII {
 		outputArt();
 	}
 	public static void generate(File imageFile, int width, int height, boolean neg) {
-		System.out.println("WH");
         imageWidth = width;
         imageHeight = height;
 		negative = neg;
@@ -103,7 +101,7 @@ public class ImageToASCII {
 					pixel = charPixels[avgLightValue / ((255 / charPixels.length) + 1)];
 				}
                 if(((x + 1) * (y * 1)) % ((imageWidth * imageHeight) / ArtGenerator.myGUI.loadingSections) == 0) {
-                    System.out.println("UPDATE LOADING BAR " + loadingStatus);
+                    //System.out.println("UPDATE LOADING BAR " + loadingStatus);
                     loadingStatus++;
                 }
                 totalPixels++;

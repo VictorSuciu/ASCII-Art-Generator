@@ -17,15 +17,5 @@ public class Fonts {
 	static Font settingLabelText = new Font("Hiragino Sans", Font.CENTER_BASELINE, 20);
 
 	static Font iconSet;
-	
-	static void initIcons() throws FontFormatException, IOException{
-//		//InputStream is = Fonts.class.getResourceAsStream("/Resources/AsciiAppIconSet.ttf");
-//		iconSet = Font.createFont(Font.TRUETYPE_FONT, new File("./Resources/AsciiAppIconSet.ttf"));
-//		iconSet.deriveFont(Font.PLAIN, 5);
-//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//		ge.registerFont(iconSet);
-//
-//		//iconSet = new Font("AsciiAppIconSet-Mac", Font.CENTER_BASELINE, 10);
-	}
-	//TESTING INTELLIJ COMMIT #2
+
 }

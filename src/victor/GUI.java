@@ -518,7 +518,7 @@ public class GUI implements ComponentListener, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == settingsButton) {
 			if(settingsWindow == null || !settingsWindow.isVisible()) {
-				settingsWindow = new SettingsGUI();
+				//settingsWindow = new SettingsGUI();
 			}
 		}
 		else if(e.getSource() == zoomInButton) {
@@ -562,7 +562,6 @@ public class GUI implements ComponentListener, MouseListener {
 			}
 			controlsTag.repaint();
 			if(imageFile != null && artViewer.getText().length() != 0) {
-				System.out.println("GENERATING ART...");
 			    generateArt();
 			}
 		}
@@ -596,6 +595,7 @@ public class GUI implements ComponentListener, MouseListener {
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
+
 		if(e.getSource() != widthInput && e.getSource() != heightInput) {
 			//artPanel.requestFocus();
 			widthInput.repaint();
@@ -673,31 +673,37 @@ public class GUI implements ComponentListener, MouseListener {
 
 		if(e.getSource() == settingsButton) {
 			settingsButton.setBackground(Colors.buttonHighlight_P);
+			settingsButton.setForeground(Colors.button_PF);
 			settingsButton.repaint();
 			updateTag(settingsButton, "Settings");
 		}
 		else if(e.getSource() == negToggleButton) {
 			negToggleButton.setBackground(Colors.buttonHighlight_P);
+			negToggleButton.setForeground(Colors.button_PF);
 			negToggleButton.repaint();
             updateTag(negToggleButton, "Background Toggle");
 		}
 		else if(e.getSource() == zoomInButton) {
 			zoomInButton.setBackground(Colors.buttonHighlight_P);
+			zoomInButton.setForeground(Colors.button_PF);
 			zoomInButton.repaint();
             updateTag(zoomInButton, "Zoom In");
 		}
 		else if(e.getSource() == zoomOutButton) {
 			zoomOutButton.setBackground(Colors.buttonHighlight_P);
+			zoomOutButton.setForeground(Colors.button_PF);
 			zoomOutButton.repaint();
             updateTag(zoomOutButton, "Zoom Out");
 		}
 		else if(e.getSource() == clipboardButton) {
 			clipboardButton.setBackground(Colors.buttonHighlight_P);
+			clipboardButton.setForeground(Colors.button_PF);
 			clipboardButton.repaint();
             updateTag(clipboardButton, "Copy Artwork");
 		}
 		else if(e.getSource() == useDefaultDimenButton) {
 			useDefaultDimenButton.setBackground(Colors.buttonHighlight_P);
+			useDefaultDimenButton.setForeground(Colors.button_PF);
 			useDefaultDimenButton.repaint();
             updateTag(useDefaultDimenButton, useWidthHeight ? "Use Target Character Number" : "Use Width and Height");
 		}
@@ -735,26 +741,32 @@ public class GUI implements ComponentListener, MouseListener {
         controlsTag.setVisible(false);
 		if(e.getSource() == settingsButton) {
 			settingsButton.setBackground(Colors.settingsButton_PB);
+			settingsButton.setForeground(Colors.getIconColor(Colors.settingsButton_PB));
 			settingsButton.repaint();
 		}
 		else if(e.getSource() == negToggleButton) {
 			negToggleButton.setBackground(Colors.negToggleButton_PB);
+			negToggleButton.setForeground(Colors.getIconColor(Colors.negToggleButton_PB));
 			negToggleButton.repaint();
 		}
 		else if(e.getSource() == zoomInButton) {
 			zoomInButton.setBackground(Colors.zoomInButton_P);
+			zoomInButton.setForeground(Colors.getIconColor(Colors.zoomInButton_P));
 			zoomInButton.repaint();
 		}
 		else if(e.getSource() == zoomOutButton) {
 			zoomOutButton.setBackground(Colors.zoomOutButton_P);
+			zoomOutButton.setForeground(Colors.getIconColor(Colors.zoomOutButton_P));
 			zoomOutButton.repaint();
 		}
 		else if(e.getSource() == clipboardButton) {
 			clipboardButton.setBackground(Colors.clipboardButton_P);
+			clipboardButton.setForeground(Colors.getIconColor(Colors.clipboardButton_P));
 			clipboardButton.repaint();
 		}
 		else if(e.getSource() == useDefaultDimenButton) {
 			useDefaultDimenButton.setBackground(Colors.useDefaultDimenButton_P);
+			useDefaultDimenButton.setForeground(Colors.getIconColor(Colors.useDefaultDimenButton_P));
 			useDefaultDimenButton.repaint();
 		}
 		else if(e.getSource() == printButton) {
