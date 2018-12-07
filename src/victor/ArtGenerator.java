@@ -11,5 +11,5 @@ public class ArtGenerator {
 	
 	public static void main(String[] args) throws IOException {
 		myGUI = new GUI();
-	}//
+	}
 }

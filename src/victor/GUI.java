@@ -753,7 +753,7 @@ public class GUI implements ComponentListener, MouseListener {
 			zoomInButton.setBackground(Colors.zoomInButton_P);
 			zoomInButton.setForeground(Colors.getIconColor(Colors.zoomInButton_P));
 			zoomInButton.repaint();
-		}//
+		}
 		else if(e.getSource() == zoomOutButton) {
 			zoomOutButton.setBackground(Colors.zoomOutButton_P);
 			zoomOutButton.setForeground(Colors.getIconColor(Colors.zoomOutButton_P));

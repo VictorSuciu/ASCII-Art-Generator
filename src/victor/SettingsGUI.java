@@ -10,7 +10,7 @@ public class SettingsGUI extends JFrame implements ComponentListener, MouseListe
 
     File settingsFile;
     String filePath;
-    //
+
     private JPanel mainPanel;
     private JPanel tabPanel;
     private JPanel settingsPanel;
