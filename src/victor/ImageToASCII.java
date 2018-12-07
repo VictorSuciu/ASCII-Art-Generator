@@ -7,8 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageToASCII {
-	
-	static File imageFile;
+
 	static BufferedImage image;
 	static BufferedImage scaledImage;
 	//static char[] charPixels = {' ', '\'', '.', '"', '+', ':', '-', '=', '+', '{', '?', '*', '$', '&', '#', '%', '@'};
@@ -24,14 +23,12 @@ public class ImageToASCII {
 	static int totalPixels;
 	public static void generate(File imageFile, int maxChars, boolean neg) {
 		System.out.println("MC");
-		//maxChars /= 2;
 		negative = neg;
 		art = "";
 		try {
 			image = ImageIO.read(imageFile);
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -51,7 +48,6 @@ public class ImageToASCII {
 
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(width == 0 && height == 0) {
@@ -76,26 +72,18 @@ public class ImageToASCII {
 
 		System.out.println(scaledImage.getWidth());
 		System.out.println(scaledImage.getHeight());
-		generateArtString(imageWidth);
+		generateArtString();
 		System.out.println("TOTAL CHARACTER COUNT = " + art.length());
 		GUI.setArt(art);
 
 	}
-	public static void generateArtString(int width) {
+	public static void generateArtString() {
 	    int loadingStatus = 0;
-		int pixelSize = scaledImage.getWidth() / width;
-		double truePixelSize = (double)scaledImage.getWidth() / (double)width;
-		char pixel = ' ';
+		char pixel;
 		totalPixels = 0;
 
-		int pixelSizeCounterX = 0;
-		double truePixelSizeCounterX = 0.0;
-		int pixelSizeCounterY = 0;
-		double truePixelSizeCounterY = 0.0;
-		int tempPixel = 0;
-		int avgLightValue = 0;
-
-		//ArtGenerator.myGUI.showLoadingBar(true);
+		int tempPixel;
+		int avgLightValue;
 
 		for(int y = 0; y < scaledImage.getHeight(); y++) {
 			for(int x = 0; x < scaledImage.getWidth(); x++) {
@@ -108,7 +96,6 @@ public class ImageToASCII {
 							((tempPixel >> 8) & 0xFF) +
 							((tempPixel) & 0xFF)) / 3;
 				}
-				//avgLightValue /= (3);
 				if(negative == false) {
 					pixel = charPixels[(charPixels.length - 1) - (avgLightValue / ((255 / charPixels.length) + 1))];
 				}
@@ -117,48 +104,13 @@ public class ImageToASCII {
 				}
                 if(((x + 1) * (y * 1)) % ((imageWidth * imageHeight) / ArtGenerator.myGUI.loadingSections) == 0) {
                     System.out.println("UPDATE LOADING BAR " + loadingStatus);
-                    //ArtGenerator.myGUI.setLoadingStatus(loadingStatus);
                     loadingStatus++;
                 }
                 totalPixels++;
 				art += pixel + "" + pixel;
 
 			}
-			//System.out.println(art.length());
 			art += "\n";
-			//System.out.println();
-			pixelSizeCounterX = 0;
-			truePixelSizeCounterX = 0.0;
-			
-			//pixelSizeCounterY += pixelSize;
-			//truePixelSizeCounterY += truePixelSize;
 		}
-        //ArtGenerator.myGUI.showLoadingBar(false);
-		//System.out.println(art);
-	}
-	public static char getPixel(int imgX, int imgY, int pixelSizeX, int pixelSizeY) {
-		//System.out.println("GETTING PIXEL...");
-		int avgLightValue = 0;
-		int tempPixel = 0;
-		
-		for(int y = imgY; y < imgY + pixelSizeY; y++) {
-			for(int x = imgX; x < imgX + pixelSizeX; x++) {
-				
-				tempPixel = image.getRGB(x,  y);
-				if(tempPixel >> 24 == 0) {
-					avgLightValue = negative ? 0 : 255;
-				}
-				else {
-					avgLightValue += (((tempPixel >> 16) & 0xFF) +
-									 ((tempPixel >> 8) & 0xFF) +
-									 ((tempPixel) & 0xFF)) / 3;
-				}
-			}
-		}
-		avgLightValue /= (pixelSizeX * pixelSizeY);
-		if(negative == false) {
-			return charPixels[(charPixels.length - 1) - (avgLightValue / ((255 / charPixels.length) + 1))];
-		}
-		return charPixels[avgLightValue / ((255 / charPixels.length) + 1)];
 	}
 }

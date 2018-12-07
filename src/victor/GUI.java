@@ -128,22 +128,15 @@ public class GUI implements ComponentListener, MouseListener {
 
 		artPanel = new JPanel();
 		artPanel.setLayout(new BoxLayout(artPanel, BoxLayout.LINE_AXIS));
-		//artPanel.setBounds(controlPanel.getWidth(), 0,
-				//frame.getWidth() - controlPanel.getWidth(),
-				//frame.getHeight());
 		generateArtPanel();
 		artPanel.setBackground(Colors.artPanel_PB);
-		//artPanel.setRequestFocusEnabled(true);
 		artPanel.addMouseListener(this);
 
-		
-		//controlPanel.setPreferredSize(new Dimension(200, 600));
         layeredArtPane.setBounds(controlPanel.getWidth(), 0,
                 frame.getWidth() - controlPanel.getWidth(),
                 frame.getHeight() - frame.getInsets().top - GuiConstants.fileButtonHeight);
         layeredArtPane.add(artScrollPane, new Integer(0));
-        //layeredArtPane.add(controlsTag, new Integer(1));
-		//generateLoadingBar();
+
 		allButFilePanel.add(controlPanel);
 		allButFilePanel.add(layeredArtPane);
 		mainPanel.add(fileButton);
@@ -198,38 +191,19 @@ public class GUI implements ComponentListener, MouseListener {
 	}
 	
 	public void buildControlPanel() {
-		/*
-		
-		controlPanel.add(zoomInButton);
-		*/
-		//control1 = new JPanel();
-		//control1.setBounds(0, 0, controlPanel.getWidth(), controlPanel.getHeight() / 6);
-		//control1.setLayout(null);
-		//control1.setBackground(Colors.controlColor1_P) ;
-
-
 
 		settingsButton = new JLabel("", JLabel.CENTER);
 		settingsButton.setBounds(0, 0, 
 				controlPanel.getWidth() / GuiConstants.settingsButtonWR, 
 				controlPanel.getHeight() / GuiConstants.controlSet1HR);
-		/*
-		settingsImg = new ImageIcon(
-				new ImageIcon("Resources/AsciiSettingsIcon.png")
-				.getImage().getScaledInstance(
-						Math.min(settingsButton.getWidth(), settingsButton.getHeight()) - smallButtonPadding, 
-						Math.min(settingsButton.getWidth(), settingsButton.getHeight()) - smallButtonPadding, 
-						Image.SCALE_DEFAULT));
-		settingsButton.setIcon(settingsImg);
-		*/
+
 		settingsButton.setFont(Fonts.iconSet);
 		settingsButton.setBackground(Colors.settingsButton_PB);
 		settingsButton.setForeground(Colors.getIconColor(Colors.settingsButton_PB));
-		//settingsButton.setFont(Fonts.ButtonText);
+
 		settingsButton.setOpaque(true);
 		settingsButton.addMouseListener(this);
-		
-		
+
 		negToggleButton = new JLabel((char)0x25D0 + "", JLabel.CENTER);
 		negToggleButton.setBounds(settingsButton.getWidth(), 0, 
 				controlPanel.getWidth() - settingsButton.getWidth(), 
@@ -426,31 +400,13 @@ public class GUI implements ComponentListener, MouseListener {
 	}
 	public void showLoadingBar(boolean show) {
 		if(show) {
-//			loadingPanelDimen.setSize(frame.getWidth(), loadingBarHeight);
-//			loadingPanel.setMinimumSize(loadingPanelDimen);
-//			loadingPanel.setPreferredSize(loadingPanelDimen);
-//			loadingPanel.setMaximumSize(loadingPanelDimen);
-//			loadingPercentDisplay.setSize(loadingPanelDimen);
 //
-//			//frame.setSize(frame.getWidth(), frame.getHeight() + loadingBarHeight);
-//			loadingPanel.revalidate();
-//			loadingPanel.repaint();
-//			//allButFilePanel.setSize(allButFilePanel.getWidth(), allButFilePanel.getHeight() - loadingBarHeight);
-//			allButFilePanel.revalidate();
-//			allButFilePanel.repaint();
 			mainPanel.add(loadingPanel);
 			mainPanel.revalidate();
 			mainPanel.repaint();
 		}
 		else {
-//			loadingPanelDimen.setSize(0, 0);
-//			loadingPanel.setMinimumSize(loadingPanelDimen);
-//			loadingPanel.setPreferredSize(loadingPanelDimen);
-//			loadingPanel.setMaximumSize(loadingPanelDimen);
-//			loadingPercentDisplay.setSize(loadingPanelDimen);
-//			//frame.setSize(frame.getWidth(), frame.getHeight() - loadingBarHeight);
-//			loadingPanel.revalidate();
-//			loadingPanel.repaint();
+//
 			mainPanel.remove(loadingPanel);
 			mainPanel.revalidate();
 			mainPanel.repaint();
@@ -670,8 +626,7 @@ public class GUI implements ComponentListener, MouseListener {
 			useDefaultDimenButton.repaint();
 		}
 		else if(e.getSource() == printButton) {
-			//printButton.setBackground(Colors.printButtonClick_P);
-			//printButton.repaint();
+
 		}
 		else if(e.getSource() == fileButton) {
 			fileButton.setBackground(Colors.buttonClick_P);
@@ -715,7 +670,7 @@ public class GUI implements ComponentListener, MouseListener {
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-        //controlsTag.setVisible(false);
+
 		if(e.getSource() == settingsButton) {
 			settingsButton.setBackground(Colors.buttonHighlight_P);
 			settingsButton.repaint();
